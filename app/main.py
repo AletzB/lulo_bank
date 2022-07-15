@@ -23,7 +23,7 @@ def request_json(id_archivo, position_start, position_end):
                 if response.status_code == 200:
                     response_json = response.json()
                     jsonString = json.dumps(response_json)
-                    with open(f'api/json_response/{args["date"]}.json', 'w') as f:
+                    with open(f'json_response/{args["date"]}.json', 'w') as f:
                         f.write(jsonString)
                     logger.info(" Download success for " + args["date"])
                 else:
@@ -38,9 +38,9 @@ def main():
 
     logger.info(' Starting...')
 
-    if not os.path.exists("api/json_response"):
+    if not os.path.exists("json_response"):
         try:
-            os.makedirs("api/json_response")
+            os.makedirs("json_response")
         except OSError:
             logger.error("Error: Creating directory. " + os.path.dirname("json_response"))
         

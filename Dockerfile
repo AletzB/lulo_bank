@@ -1,7 +1,7 @@
 # build the image based on python:3.8-slim-buster image
 FROM python:3.8-slim-buster
 
-LABEL Description="APP flask"
+LABEL Description="APP tvmaze"
 
 # the work directory inside the container
 WORKDIR /app

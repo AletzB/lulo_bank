@@ -1,16 +1,15 @@
 version: "3.9"
 services:
-  web:
-    container_name: flask-API
+  api:
+    container_name: tvmaze_API
     build: .
     ports:
-      - "5001:5000"
+      - "5000:5000"
     volumes: 
       - api.db:/app/db
 
     environment:
       - .env
-
 volumes:
     api.db:
-      external: true
+     

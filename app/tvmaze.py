@@ -3,6 +3,7 @@ from sqllite_db import sqllite_db
 import logging
 import pandas as pd
 import os
+import numpy as np
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -12,11 +13,11 @@ class publicaciones(object):
 
     def run(self):
         logger.info("Starting the process to download the data from http://api.tvmaze.com ----------------------------------------------------------------------------")
-        s_d= Request(url='http://api.tvmaze.com/schedule/web', params={"date":"2020-12-01"}, timeout=3)
+        s_d= Request(url='http://api.tvmaze.com/schedule/web', params={"date":"2020-12-01"}, timeout=4)
         response = s_d.parallelize_request()
         logger.info("Starting the process to load the data to the database -------------------------------------------------------------------------------------------")
         dataset = pd.read_parquet("app/data.parquet").reset_index().drop(['index'], axis=1)
-        dataset = dataset.astype({"id": str,"url": str,"name":str,"season":str,"number":str,"runtime":str,"average_rating":str,"type":str,"image":str,"summary":str,"link":str,"embedded_show":str})
+        #dataset = pd.read_parquet("data.parquet").reset_index().drop(['index'], axis=1)
         self.__load_data(dataset)
        
 

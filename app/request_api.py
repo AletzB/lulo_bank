@@ -22,18 +22,22 @@ class Request:
         try:
             response = requests.get(self.url, params=self.params, timeout=self.timeout)
             if response.status_code == 200:
-                response_json = json.dumps(response.json())
-                return response_json
+                #response_json = json.dumps(response.json())
+                return response.status_code
             else:
+                return response.status_code
                 logger.error("Error: " + response.status_code)
+                
         except Exception as e:
             logger.error(e)
-
+            return "Error"
+            
     def request_json(self, id_archivo, position_start, position_end):
         
         logger.info(" Requesting json from {}".format(id_archivo))
         try:
             for i in range (position_start, position_end):
+                if i+1 <32:
                     args={"date":f"2020-12-0{i+1}"} if i+1 < 10 else {"date":f"2020-12-{i+1}"}
                     response = requests.get(self.url, params=args, timeout=self.timeout)
                     if response.status_code == 200:

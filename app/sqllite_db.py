@@ -19,20 +19,20 @@ class sqllite_db(object):
                 con = self.get_connection()
                 c = con.cursor()
                 c.execute(""" CREATE TABLE IF NOT EXISTS {t} (
-                        Id text, 
+                        Id integer, 
                         Url text,
                         Name text,
-                        Season text,
-                        Number text,
+                        Season integer,
+                        Number Real,
                         Type text,
-                        Airdate text,
-                        Airtime text,
-                        Airstamp text,
-                        Runtime text,
+                        Airdate Numeric,
+                        Airtime Numeric,
+                        Airstamp Numeric,
+                        Runtime Real,
                         Image text,
                         Summary text,
                         Link text,
-                        Average_rating text,
+                        Average_rating Real,
                 Embedded_show text)""".format(t= self.table))
                 con.commit()
                 con.close()
